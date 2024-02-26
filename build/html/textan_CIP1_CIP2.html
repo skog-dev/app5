@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module textan_CIP1_CIP2 &mdash; Documentation S2App5informatique 1.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=de505bba"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Module debug_handler_common" href="debug_handler_common.html" />
+    <link rel="prev" title="Bienvenue - Documentation de la problématique GIF270" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            S2App5informatique
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module textan_CIP1_CIP2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagramme-de-classe">Diagramme de classe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-textan_CIP1_CIP2">Code du module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn"><code class="docutils literal notranslate"><span class="pre">TextAn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.PONC"><code class="docutils literal notranslate"><span class="pre">TextAn.PONC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.analyze"><code class="docutils literal notranslate"><span class="pre">TextAn.analyze()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.dot_product_aut"><code class="docutils literal notranslate"><span class="pre">TextAn.dot_product_aut()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.dot_product_dict"><code class="docutils literal notranslate"><span class="pre">TextAn.dot_product_dict()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.dot_product_dict_aut"><code class="docutils literal notranslate"><span class="pre">TextAn.dot_product_dict_aut()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.find_author"><code class="docutils literal notranslate"><span class="pre">TextAn.find_author()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.gen_text_all"><code class="docutils literal notranslate"><span class="pre">TextAn.gen_text_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.gen_text_auteur"><code class="docutils literal notranslate"><span class="pre">TextAn.gen_text_auteur()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_CIP1_CIP2.TextAn.get_nth_element"><code class="docutils literal notranslate"><span class="pre">TextAn.get_nth_element()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="textan_common.html">Module textan_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_textan.html">Module test_textan</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">S2App5informatique</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module textan_CIP1_CIP2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/textan_CIP1_CIP2.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/UdeS_logo_h_pms347-crop.jpg"><img alt="_images/UdeS_logo_h_pms347-crop.jpg" src="_images/UdeS_logo_h_pms347-crop.jpg" style="width: 200px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="module-textan-cip1-cip2">
+<h1>Module textan_CIP1_CIP2<a class="headerlink" href="#module-textan-cip1-cip2" title="Link to this heading"></a></h1>
+<section id="diagramme-de-classe">
+<h2>Diagramme de classe<a class="headerlink" href="#diagramme-de-classe" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="_images/classes_textan_CIP1_CIP2.png"><img alt="_images/classes_textan_CIP1_CIP2.png" src="_images/classes_textan_CIP1_CIP2.png" style="width: 751.0px; height: 792.0px;" /></a>
+</section>
+<section id="module-textan_CIP1_CIP2">
+<span id="code-du-module"></span><h2>Code du module<a class="headerlink" href="#module-textan_CIP1_CIP2" title="Link to this heading"></a></h2>
+<p>Ce fichier contient la classe TextAn, à utiliser pour résoudre la problématique.
+C’est un gabarit pour l’application de traitement des fréquences de mots dans les oeuvres d’auteurs divers.</p>
+<p>Les méthodes apparaissant dans ce fichier définissent une API qui est utilisée par l’application
+de test test_textan.py
+Les paramètres d’entrée et de sortie (Application Programming Interface, API) sont définis,
+mais le code est à écrire au complet.
+Vous pouvez ajouter toutes les méthodes et toutes les variables nécessaires au bon fonctionnement du système</p>
+<p>La classe TextAn est invoquée par la classe TestTextAn (contenue dans test_textan.py) :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tous les arguments requis sont présents et accessibles dans args (dans le fichier test_textan.py)</p></li>
+<li><dl class="simple">
+<dt>Note<span class="classifier">vous pouvez tester votre code en utilisant les commandes :</span></dt><dd><ul>
+<li><p>« python test_textan.py »</p></li>
+<li><p>« python test_textan.py -h » (donne la liste des arguments possibles)</p></li>
+<li><p>« python test_textan.py -v » (mode « verbose », qui indique les valeurs de tous les arguments)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">textan_CIP1_CIP2.</span></span><span class="sig-name descname"><span class="pre">TextAn</span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn" title="Link to this definition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="textan_common.html#textan_common.TextAnCommon" title="textan_common.TextAnCommon"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextAnCommon</span></code></a></p>
+<p>Classe à utiliser pour coder la solution à la problématique :</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>La classe héritée TextAnCommon contient certaines fonctions de base pour faciliter le travail :</dt><dd><ul>
+<li><p>recherche des auteurs</p></li>
+<li><p>ouverture des répertoires</p></li>
+<li><p>et autres (voir la classe TextAnCommon pour plus d’information)</p></li>
+<li><p>La classe ParsingClassTextAn est héritée par TextAnCommon et lit la ligne de commande</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Les interfaces du code à développer sont présentes, mais tout le code est à écrire</p></li>
+<li><dl class="simple">
+<dt>En particulier, il faut compléter les fonctions suivantes :</dt><dd><ul>
+<li><p>dot_product_dict (dict1, dict2)</p></li>
+<li><p>dot_product_aut (auteur1, auteur2)</p></li>
+<li><p>doct_product_dict_aut (dict, auteur)</p></li>
+<li><p>find_author (oeuvre)</p></li>
+<li><p>gen_text (auteur, taille, textname)</p></li>
+<li><p>get_nth_element (auteur, n)</p></li>
+<li><p>analyze()</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+<p>Initialize l’objet de type TextAn lorsqu’il est créé</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Utilise simplement les informations fournies dans la classe TextAnCommon</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Ne fait qu’initialiser l’objet de type TextAn</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.PONC">
+<span class="sig-name descname"><span class="pre">PONC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['!']</span></em><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.PONC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.analyze">
+<span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.analyze"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.analyze" title="Link to this definition"></a></dt>
+<dd><p>Fait l’analyse des textes fournis, en traitant chaque oeuvre de chaque auteur</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>void : toute l’information est contenue dans l’objet TextAn</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne retourne rien, toute l’information extraite est conservée dans des structures internes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.dot_product_aut">
+<span class="sig-name descname"><span class="pre">dot_product_aut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auteur1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auteur2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.dot_product_aut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.dot_product_aut" title="Link to this definition"></a></dt>
+<dd><p>Calcule le produit scalaire normalisé entre les oeuvres de deux auteurs, en utilisant dot_product_dict()</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>auteur1 (str) : le nom du premier auteur
+auteur2 (str) : le nom du deuxième auteur</p>
+</dd>
+<dt>Returns :</dt><dd><p>dot_product (float) : Le produit scalaire normalisé des n-grammes de deux auteurs</p>
+</dd>
+</dl>
+<p>Copyright 2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.dot_product_dict">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dot_product_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict1_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict2_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.dot_product_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.dot_product_dict" title="Link to this definition"></a></dt>
+<dd><p>Calcule le produit scalaire NORMALISÉ de deux vecteurs représentés par des dictionnaires</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>dict1 (dict) : le premier vecteur
+dict2 (dict) : le deuxième vecteur</p>
+</dd>
+<dt>Returns :</dt><dd><p>dot_product (float) : Le produit scalaire normalisé de deux vecteurs</p>
+</dd>
+</dl>
+<p>Copyright 2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.dot_product_dict_aut">
+<span class="sig-name descname"><span class="pre">dot_product_dict_aut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_oeuvre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auteur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.dot_product_dict_aut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.dot_product_dict_aut" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Calcule le produit scalaire normalisé entre une oeuvre inconnue et les oeuvres d’un auteur,</dt><dd><p>en utilisant dot_product_dict()</p>
+</dd>
+<dt>Args :</dt><dd><p>dict_oeuvre (dict) : la liste des n-grammes d’une oeuvre inconnue
+auteur (str) : le nom d’un auteur</p>
+</dd>
+<dt>Returns :</dt><dd><p>dot_product (float) : Le produit scalaire normalisé des n-grammes de deux auteurs</p>
+</dd>
+</dl>
+<p>Copyright 2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.find_author">
+<span class="sig-name descname"><span class="pre">find_author</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oeuvre</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.find_author"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.find_author" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Après analyse des textes d’auteurs connus, retourner la liste d’auteurs</dt><dd><p>et le niveau de proximité (un nombre entre 0 et 1) de l’oeuvre inconnue
+avec les écrits de chacun d’entre eux</p>
+</dd>
+<dt>Args :</dt><dd><p>oeuvre (str) : Nom du fichier contenant l’oeuvre d’un auteur inconnu</p>
+</dd>
+<dt>Returns :</dt><dd><p>resultats (Liste[(string, float)]) : Liste de tuples (auteurs, niveau de proximité),
+où la proximité est un nombre entre 0 et 1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.gen_text_all">
+<span class="sig-name descname"><span class="pre">gen_text_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taille</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.gen_text_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.gen_text_all" title="Link to this definition"></a></dt>
+<dd><p>Après analyse des textes d’auteurs connus, produire un texte selon des statistiques de l’ensemble des auteurs</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>taille (int) : Taille du texte à générer
+textname (str) : Nom du fichier texte à générer.</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne retourne rien, le texte produit doit être écrit dans le fichier « textname »</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.gen_text_auteur">
+<span class="sig-name descname"><span class="pre">gen_text_auteur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auteur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taille</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.gen_text_auteur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.gen_text_auteur" title="Link to this definition"></a></dt>
+<dd><p>Après analyse des textes d’auteurs connus, produire un texte selon des statistiques d’un auteur</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>auteur (str) : Nom de l’auteur à utiliser
+taille (int) : Taille du texte à générer
+textname (str) : Nom du fichier texte à générer.</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne retourne rien, le texte produit doit être écrit dans le fichier « textname »</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_CIP1_CIP2.TextAn.get_nth_element">
+<span class="sig-name descname"><span class="pre">get_nth_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auteur</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">[[&lt;class</span> <span class="pre">'str'&gt;]]</span></span></span><a class="reference internal" href="_modules/textan_CIP1_CIP2.html#TextAn.get_nth_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_CIP1_CIP2.TextAn.get_nth_element" title="Link to this definition"></a></dt>
+<dd><p>Après analyse des textes d’auteurs connus, retourner le n-ième plus fréquent n-gramme de l’auteur indiqué</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>auteur (str) : Nom de l’auteur à utiliser
+n (int) : Indice du n-gramme à retourner</p>
+</dd>
+<dt>Returns :</dt><dd><p>ngram (List[Liste[string]]) : Liste de liste de mots composant le n-gramme recherché
+(il est possible qu’il y ait plus d’un n-gramme au même rang)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation créée le 13 févr. 2024.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="index.html" class="btn btn-neutral float-left" title="Bienvenue - Documentation de la problématique GIF270" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="debug_handler_common.html" class="btn btn-neutral float-right" title="Module debug_handler_common" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2023-2024, Frédéric Mailhot et Université de Sherbrooke.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

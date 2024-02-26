@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module textan_common &mdash; Documentation S2App5informatique 1.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=de505bba"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=d99ca74e"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Module test_textan" href="test_textan.html" />
+    <link rel="prev" title="Module debug_handler_common" href="debug_handler_common.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            S2App5informatique
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="textan_CIP1_CIP2.html">Module textan_CIP1_CIP2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module textan_common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagramme-de-classe">Diagramme de classe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-textan_common">Code du module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#textan_common.TextAnCommon"><code class="docutils literal notranslate"><span class="pre">TextAnCommon</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.PONC"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.PONC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.get_aut_files"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.get_aut_files()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.get_empty_ngram"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.get_empty_ngram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.print_ponc"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.print_ponc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.set_aut_dir"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.set_aut_dir()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.set_auteurs"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.set_auteurs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.set_ngram"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.set_ngram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.set_ponc"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.set_ponc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.set_remove_word_1"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.set_remove_word_1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#textan_common.TextAnCommon.set_remove_word_2"><code class="docutils literal notranslate"><span class="pre">TextAnCommon.set_remove_word_2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_textan.html">Module test_textan</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">S2App5informatique</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module textan_common</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/textan_common.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/UdeS_logo_h_pms347-crop.jpg"><img alt="_images/UdeS_logo_h_pms347-crop.jpg" src="_images/UdeS_logo_h_pms347-crop.jpg" style="width: 200px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="module-textan-common">
+<h1>Module textan_common<a class="headerlink" href="#module-textan-common" title="Link to this heading"></a></h1>
+<section id="diagramme-de-classe">
+<h2>Diagramme de classe<a class="headerlink" href="#diagramme-de-classe" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="_images/classes_textan_common.png"><img alt="_images/classes_textan_common.png" src="_images/classes_textan_common.png" style="width: 382.0px; height: 481.0px;" /></a>
+</section>
+<section id="module-textan_common">
+<span id="code-du-module"></span><h2>Code du module<a class="headerlink" href="#module-textan_common" title="Link to this heading"></a></h2>
+<p>Ce fichier contient la classe TextAnCommon, utilisée pour la résolution de la problématique.
+Ce code ne devrait pas être modifié, il contient des méthodes utiles qui sont utilisées dans le gabarit de solution</p>
+<p>Les méthodes apparaissant dans ce fichier définissent des fonctionnalités de base qui sont utilisées dans
+la classe TextAn.</p>
+<p>La classe TextAn est invoquée par la classe TestTextAn (contenue dans test_textan.py) :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Tous les arguments requis sont présents et accessibles dans args (dans le fichier test_textan.py)</p></li>
+<li><dl class="simple">
+<dt>Note<span class="classifier">vous pouvez tester votre code en utilisant les commandes :</span></dt><dd><ul>
+<li><p>« python test_textan.py »</p></li>
+<li><p>« python test_textan.py -h » (donne la liste des arguments possibles)</p></li>
+<li><p>« python test_textan.py -v » (mode « verbose », qui indique les valeurs de tous les arguments)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">textan_common.</span></span><span class="sig-name descname"><span class="pre">TextAnCommon</span></span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon" title="Link to this definition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Initialize l’objet de type TextAn lorsqu’il est créé</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>void : Utilise simplement les informations fournies dans l’objet Textan_config</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait qu’initialiser l’objet de type TextAn</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.PONC">
+<span class="sig-name descname"><span class="pre">PONC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['!']</span></em><a class="headerlink" href="#textan_common.TextAnCommon.PONC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.get_aut_files">
+<span class="sig-name descname"><span class="pre">get_aut_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auteur</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.get_aut_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.get_aut_files" title="Link to this definition"></a></dt>
+<dd><p>Obtient la liste des fichiers (avec le chemin complet) des oeuvres d’un auteur</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>auteur (string) : le nom de l’auteur dont on veut obtenir la liste des oeuvres</p>
+</dd>
+<dt>Returns :</dt><dd><p>oeuvres (Liste[string]) : liste des oeuvres (avec le chemin complet pour y accéder)</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.get_empty_ngram">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_empty_ngram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.get_empty_ngram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.get_empty_ngram" title="Link to this definition"></a></dt>
+<dd><p>Retourne un ngramme vide de la taille indiquée (liste contenant des chaînes de caractères vides)</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>size (int) : le nombre de mots vides dans la liste ngramme</p>
+</dd>
+<dt>Returns :</dt><dd><p>ngram (liste) : La liste de mots vides</p>
+</dd>
+</dl>
+<p>Copyright 2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.print_ponc">
+<span class="sig-name descname"><span class="pre">print_ponc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.print_ponc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.print_ponc" title="Link to this definition"></a></dt>
+<dd><p>Imprime la liste des signes de ponctuation considérés</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>None</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait qu’imprimer la liste des signes de ponctuation</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.set_aut_dir">
+<span class="sig-name descname"><span class="pre">set_aut_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">aut_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.set_aut_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.set_aut_dir" title="Link to this definition"></a></dt>
+<dd><p>Définit le nom du répertoire qui contient l’ensemble des répertoires d’auteurs</p>
+<p>Note : L’appel à cette méthode extrait la liste des répertoires d’auteurs et les ajoute à self.auteurs</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>aut_dir (string) : Nom du répertoire (peut être absolu ou bien relatif au répertoire d’exécution)</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait que définir le nom du répertoire qui contient les répertoires d’auteurs</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.set_auteurs">
+<span class="sig-name descname"><span class="pre">set_auteurs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.set_auteurs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.set_auteurs" title="Link to this definition"></a></dt>
+<dd><p>Obtient la liste des auteurs, à partir du répertoire qui les contient tous</p>
+<dl class="simple">
+<dt>Note<span class="classifier">le champ self.rep_aut doit être prédéfini :</span></dt><dd><ul class="simple">
+<li><p>Par défaut, il contient le répertoire d’exécution du script</p></li>
+<li><p>Peut être redéfini par la méthode set_aut_dir</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait qu’obtenir la liste des répertoires d’auteurs et modifier la liste self.auteurs</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.set_ngram">
+<span class="sig-name descname"><span class="pre">set_ngram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ngram</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.set_ngram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.set_ngram" title="Link to this definition"></a></dt>
+<dd><p>Indique que l’analyse et la génération de texte se fera avec des n-grammes de taille ngram</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>ngram (int) : Indique la taille des n-grammes (1, 2, 3, …)</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait que mettre à jour le champ ngram</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.set_ponc">
+<span class="sig-name descname"><span class="pre">set_ponc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.set_ponc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.set_ponc" title="Link to this definition"></a></dt>
+<dd><p>Détermine si les signes de ponctuation sont conservés (True) ou éliminés (False)</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>value (boolean) : Conserve la ponctuation (Vrai) ou élimine la ponctuation (Faux)</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait qu’assigner la valeur du champ keep_ponc</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.set_remove_word_1">
+<span class="sig-name descname"><span class="pre">set_remove_word_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remove_word_1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.set_remove_word_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.set_remove_word_1" title="Link to this definition"></a></dt>
+<dd><p>Indique que l’analyse et la génération de texte n’utilisera pas les mots de 1 seule lettre</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>remove_word_1 (bool) : Vrai : retrait des mots de 1 lettre</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait que mettre à jour le champ remove_word_1</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="textan_common.TextAnCommon.set_remove_word_2">
+<span class="sig-name descname"><span class="pre">set_remove_word_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">remove_word_2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/textan_common.html#TextAnCommon.set_remove_word_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#textan_common.TextAnCommon.set_remove_word_2" title="Link to this definition"></a></dt>
+<dd><p>Indique que l’analyse et la génération de texte n’utilisera pas les mots de 2 lettres</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>remove_word_2 (bool) : Vrai : retrait des mots de 2 lettres</p>
+</dd>
+<dt>Returns :</dt><dd><p>void : ne fait que mettre à jour le champ remove_word_2</p>
+</dd>
+</dl>
+<p>Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation créée le 13 févr. 2024.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="debug_handler_common.html" class="btn btn-neutral float-left" title="Module debug_handler_common" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="test_textan.html" class="btn btn-neutral float-right" title="Module test_textan" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2023-2024, Frédéric Mailhot et Université de Sherbrooke.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

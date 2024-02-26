@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>textan_common &mdash; Documentation S2App5informatique 1.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=de505bba"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=d99ca74e"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            S2App5informatique
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../textan_CIP1_CIP2.html">Module textan_CIP1_CIP2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../textan_common.html">Module textan_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../test_textan.html">Module test_textan</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">S2App5informatique</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">textan_common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de textan_common</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+<span class="sd">&quot;&quot;&quot; Ce fichier contient la classe TextAnCommon, utilisée pour la résolution de la problématique.</span>
+<span class="sd">    Ce code ne devrait pas être modifié, il contient des méthodes utiles qui sont utilisées dans le gabarit de solution</span>
+
+<span class="sd">    Les méthodes apparaissant dans ce fichier définissent des fonctionnalités de base qui sont utilisées dans</span>
+<span class="sd">    la classe TextAn.</span>
+
+<span class="sd">    La classe TextAn est invoquée par la classe TestTextAn (contenue dans test_textan.py) :</span>
+
+<span class="sd">        - Tous les arguments requis sont présents et accessibles dans args (dans le fichier test_textan.py)</span>
+<span class="sd">        - Note : vous pouvez tester votre code en utilisant les commandes :</span>
+<span class="sd">            + &quot;python test_textan.py&quot;</span>
+<span class="sd">            + &quot;python test_textan.py -h&quot; (donne la liste des arguments possibles)</span>
+<span class="sd">            + &quot;python test_textan.py -v&quot; (mode &quot;verbose&quot;, qui indique les valeurs de tous les arguments)</span>
+
+<span class="sd">    Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">ntpath</span>
+
+
+<div class="viewcode-block" id="TextAnCommon">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon">[docs]</a>
+<span class="k">class</span> <span class="nc">TextAnCommon</span><span class="p">:</span>
+    <span class="c1"># Le code qui suit est fourni pour vous faciliter la vie.  Il n&#39;a pas à être modifié</span>
+    <span class="c1"># Signes de ponctuation à retirer (compléter la liste qui ne comprend que &quot;!&quot; au départ)</span>
+    <span class="c1"># Modifier cette liste dans votre code (textan_CIP1_CIP2.py)</span>
+    <span class="n">PONC</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;!&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="TextAnCommon.set_ponc">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.set_ponc">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ponc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Détermine si les signes de ponctuation sont conservés (True) ou éliminés (False)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            value (boolean) : Conserve la ponctuation (Vrai) ou élimine la ponctuation (Faux)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait qu&#39;assigner la valeur du champ keep_ponc</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep_ponc</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.print_ponc">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.print_ponc">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_ponc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Imprime la liste des signes de ponctuation considérés</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait qu&#39;imprimer la liste des signes de ponctuation</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Signes de ponctuation à retirer: &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PONC</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.get_empty_ngram">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.get_empty_ngram">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_empty_ngram</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne un ngramme vide de la taille indiquée (liste contenant des chaînes de caractères vides)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            size (int) : le nombre de mots vides dans la liste ngramme</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            ngram (liste) : La liste de mots vides</span>
+
+<span class="sd">        Copyright 2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ngram</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span>
+        <span class="k">return</span> <span class="n">ngram</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.set_auteurs">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.set_auteurs">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_auteurs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Obtient la liste des auteurs, à partir du répertoire qui les contient tous</span>
+
+<span class="sd">        Note : le champ self.rep_aut doit être prédéfini :</span>
+<span class="sd">            - Par défaut, il contient le répertoire d&#39;exécution du script</span>
+<span class="sd">            - Peut être redéfini par la méthode set_aut_dir</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait qu&#39;obtenir la liste des répertoires d&#39;auteurs et modifier la liste self.auteurs</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span>
+        <span class="n">full_path_auteurs</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mots_auteurs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">auteur_path</span> <span class="ow">in</span> <span class="n">full_path_auteurs</span><span class="p">:</span>
+            <span class="n">auteur</span> <span class="o">=</span> <span class="n">ntpath</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">auteur_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auteurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">auteur</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mots_auteurs</span><span class="p">[</span><span class="n">auteur</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">taille_mots</span><span class="p">[</span><span class="n">auteur</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.set_aut_dir">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.set_aut_dir">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_aut_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aut_dir</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Définit le nom du répertoire qui contient l&#39;ensemble des répertoires d&#39;auteurs</span>
+
+<span class="sd">        Note : L&#39;appel à cette méthode extrait la liste des répertoires d&#39;auteurs et les ajoute à self.auteurs</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            aut_dir (string) : Nom du répertoire (peut être absolu ou bien relatif au répertoire d&#39;exécution)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait que définir le nom du répertoire qui contient les répertoires d&#39;auteurs</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">aut_dir</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span> <span class="o">=</span> <span class="n">aut_dir</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span> <span class="n">aut_dir</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_auteurs</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.get_aut_files">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.get_aut_files">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_aut_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auteur</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Obtient la liste des fichiers (avec le chemin complet) des oeuvres d&#39;un auteur</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            auteur (string) : le nom de l&#39;auteur dont on veut obtenir la liste des oeuvres</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            oeuvres (Liste[string]) : liste des oeuvres (avec le chemin complet pour y accéder)</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">auteur_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">auteur</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span>
+        <span class="n">oeuvres</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">auteur_dir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">oeuvres</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.set_ngram">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.set_ngram">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ngram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ngram</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique que l&#39;analyse et la génération de texte se fera avec des n-grammes de taille ngram</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            ngram (int) : Indique la taille des n-grammes (1, 2, 3, ...)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait que mettre à jour le champ ngram</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="n">ngram</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.set_remove_word_1">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.set_remove_word_1">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_remove_word_1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_word_1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique que l&#39;analyse et la génération de texte n&#39;utilisera pas les mots de 1 seule lettre</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            remove_word_1 (bool) : Vrai : retrait des mots de 1 lettre</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait que mettre à jour le champ remove_word_1</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove_word_1</span> <span class="o">=</span> <span class="n">remove_word_1</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="TextAnCommon.set_remove_word_2">
+<a class="viewcode-back" href="../textan_common.html#textan_common.TextAnCommon.set_remove_word_2">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_remove_word_2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remove_word_2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique que l&#39;analyse et la génération de texte n&#39;utilisera pas les mots de 2 lettres</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            remove_word_2 (bool) : Vrai : retrait des mots de 2 lettres</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait que mettre à jour le champ remove_word_2</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove_word_2</span> <span class="o">=</span> <span class="n">remove_word_2</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize l&#39;objet de type TextAn lorsqu&#39;il est créé</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            void : Utilise simplement les informations fournies dans l&#39;objet Textan_config</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            void : ne fait qu&#39;initialiser l&#39;objet de type TextAn</span>
+
+<span class="sd">        Copyright 2018-2023, F. Mailhot et Université de Sherbrooke</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Initialisation des champs nécessaires aux fonctions fournies</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keep_ponc</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove_word_1</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">remove_word_2</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rep_aut</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auteurs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ngram</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mots_auteurs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">taille_mots</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2023-2024, Frédéric Mailhot et Université de Sherbrooke.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
