@@ -23,8 +23,10 @@
 """
 import math
 import string
+import os
 
 from textan_common import TextAnCommon
+from handle_unicode_common import HandleUnicodeCommon as HUC
 
 
 class TextAn(TextAnCommon):
@@ -63,6 +65,7 @@ class TextAn(TextAnCommon):
 
         # Initialisation des champs nécessaires aux fonctions fournies
         super().__init__()
+        self.set_ngram(2)
 
         # Au besoin, ajouter votre code d'initialisation de l'objet de type TextAn lors de sa création
 
@@ -79,7 +82,6 @@ class TextAn(TextAnCommon):
     def load_text_aut(self, auteur: str):
         for file in self.get_aut_files(auteur):
             self.mots_auteurs[auteur].update(self.load_text(file))
-
         self.taille_mots[auteur] = len(self.mots_auteurs[auteur])
 
     def load_text(self, path: str):
@@ -88,16 +90,18 @@ class TextAn(TextAnCommon):
         f.close()
 
         mots = {}
-        ngrams = []
+        self.ngram = 2
+        for i in range(self.ngram - 1, len(buffer)):
 
-        for i in range(len(buffer) - self.ngram):
-            ngrams.append(tuple(buffer[i:i + self.ngram]))
-
-        for ngram in ngrams:
-            if ngram in mots:
-                mots[ngram] += 1
-            else:
-                mots[ngram] = 1
+            key = ""
+            for j in range(self.ngram):
+                if j > 0:
+                    key += " "
+                key += HUC.normalize_string(buffer[i - j])
+            try:
+                mots[HUC.normalize_string(key)][0] += 1
+            except KeyError:
+                mots[HUC.normalize_string(key)] = [1, {}]
 
         return mots
 
@@ -105,12 +109,12 @@ class TextAn(TextAnCommon):
     def normalize_dict(vector: dict) -> dict:
         val = 0
         for key in vector.keys():
-            val += vector[key] ** 2
+            val += vector[key][0] ** 2
 
         norm = math.sqrt(val)
 
         for key in vector.keys():
-            vector[key] /= norm
+            vector[key][0] /= norm
 
         return vector
 
@@ -118,6 +122,8 @@ class TextAn(TextAnCommon):
     def dot_product_dict(
             dict1: dict, dict2: dict, dict1_size: int, dict2_size: int
     ) -> float:
+
+        print("dot_product_dict")
         """Calcule le produit scalaire NORMALISÉ de deux vecteurs représentés par des dictionnaires
 
         Args :
@@ -133,13 +139,32 @@ class TextAn(TextAnCommon):
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
 
-        dot_product = 0.0
+        base_vector = {}
+        for key in dict1.keys():
+            base_vector[key] = [0, {}]
 
-        dict1 = TextAn.normalize_dict(dict1)
-        dict2 = TextAn.normalize_dict(dict2)
+        vector2 = base_vector.copy()
 
-        for key1, key2 in zip(dict1, dict2):
-            dot_product += dict1[key1] * dict2[key2]
+        for key in base_vector.keys():
+            try:
+                vector2[key][0] = dict2[key][0]
+            except KeyError:
+                continue
+
+        vector2 = TextAn.normalize_dict(vector2)  # normaliser les vecteurs
+        vector1 = TextAn.normalize_dict(dict1)
+
+        dot_product = 0
+
+        for key in vector1.keys():
+            if key not in vector2.keys():
+                raise KeyError("La clé n'est pas dans le dictionnaire du vecteur 2.")
+
+            dot_product += vector1[key][0] * vector2[key][0]
+
+
+        #for key1, key2 in zip(dict1, dict2):
+        #    dot_product += dict1[key1][0] * dict2[key2][0]
 
         # TODO : Implement dot_product_dict
         # dot_product = 1.0
@@ -150,6 +175,7 @@ class TextAn(TextAnCommon):
         return dot_product
 
     def dot_product_aut(self, auteur1: str, auteur2: str) -> float:
+        print("dot_product_aut")
         """Calcule le produit scalaire normalisé entre les oeuvres de deux auteurs, en utilisant dot_product_dict()
 
         Args :
@@ -182,6 +208,7 @@ class TextAn(TextAnCommon):
         return dot_product
 
     def dot_product_dict_aut(self, dict_oeuvre: dict, auteur: str) -> float:
+        print("dot_product_dict_aut")
         """Calcule le produit scalaire normalisé entre une oeuvre inconnue et les oeuvres d'un auteur,
            en utilisant dot_product_dict()
 
@@ -215,6 +242,7 @@ class TextAn(TextAnCommon):
         return dot_product
 
     def find_author(self, oeuvre: str) -> []:
+        print("find_author")
         """Après analyse des textes d'auteurs connus, retourner la liste d'auteurs
             et le niveau de proximité (un nombre entre 0 et 1) de l'oeuvre inconnue
             avec les écrits de chacun d'entre eux
@@ -229,7 +257,6 @@ class TextAn(TextAnCommon):
 
         # Les lignes suivantes ne servent qu'à éliminer un avertissement.
         # Il faut les retirer lorsque le code est complété
-
         resultats = []
 
         for auteur in self.auteurs:
@@ -254,6 +281,7 @@ class TextAn(TextAnCommon):
         return resultats
 
     def gen_text_all(self, taille: int, textname: str) -> None:
+        print("gen_text_all")
         """Après analyse des textes d'auteurs connus, produire un texte selon des statistiques de l'ensemble des auteurs
 
         Args :
@@ -271,6 +299,7 @@ class TextAn(TextAnCommon):
         return
 
     def gen_text_auteur(self, auteur: str, taille: int, textname: str) -> None:
+        print("gen_text_auteur")
         """Après analyse des textes d'auteurs connus, produire un texte selon des statistiques d'un auteur
 
         Args :
@@ -289,6 +318,7 @@ class TextAn(TextAnCommon):
         return
 
     def get_nth_element(self, auteur: str, n: int) -> [[str]]:
+        print("get_nth_element")
         """Après analyse des textes d'auteurs connus, retourner le n-ième plus fréquent n-gramme de l'auteur indiqué
 
         Args :
@@ -314,6 +344,7 @@ class TextAn(TextAnCommon):
         return ngram
 
     def analyze(self) -> None:
+        print("analyse")
         """Fait l'analyse des textes fournis, en traitant chaque oeuvre de chaque auteur
 
         Args :
@@ -339,8 +370,19 @@ class TextAn(TextAnCommon):
         # Ces trois lignes ne servent qu'à éliminer un avertissement. Il faut les retirer lorsque le code est complété
         # TODO : Implement analyze
 
-        ngram = self.get_empty_ngram(2)
-        print(ngram)
-        print(self.auteurs)
+
+        files = []
+        if os.path.isdir(self.rep_aut):
+            # Récupère la liste des fichiers dans le répertoire
+            files = os.listdir(self.rep_aut)
+
+        print("files = %s" % files)
+
+        for author in files:
+            txt=os.listdir(self.rep_aut+"/"+author)
+            for file in txt:
+                print("ressemblance withs authors of the file : %s" % file)
+                print(author+"/"+file)
+                print(self.find_author(self.rep_aut+"/"+author+"/"+file))
 
         return

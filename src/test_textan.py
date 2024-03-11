@@ -446,7 +446,7 @@ class TestTextAn(ParsingClassTextAn):
         Returns :
             (void) : Au retour, tous les cips sont inclus dans la liste self.cips
         """
-        cip_file = self.rep_code + "/etudiants.txt"
+        cip_file = "C:/Users/arthu/OneDrive/Universite/Udes/S2/APP5/code_etudiant/Problematique/app5/data/etudiants.txt"
         cip_list = open(cip_file, "r")
         lines = cip_list.readlines()
         for line in lines:
@@ -693,10 +693,10 @@ def main() -> None:
         try:
             tta.load_cip_code(cip)  # Chargement et configuration du code étudiant
             tta.textan.analyze()  # Analyse des textes des auteurs (code étudiant)
-            tta.generate()  # Produit un texte aléatoire avec les mêmes statistiques que l'auteur choisi (code étudiant)
-            tta.find()  # Calcul de proximité entre un texte inconnu et l'ensemble des auteurs (code étudiant)
-            tta.get_nth_ngram()  # Trouve le n-ième n-gramme le plus fréquent d'un certain auteur (code étudiant)
-            tta.check_auteur_distance()
+            #tta.generate()  # Produit un texte aléatoire avec les mêmes statistiques que l'auteur choisi (code étudiant)
+            #tta.find()  # Calcul de proximité entre un texte inconnu et l'ensemble des auteurs (code étudiant)
+            #tta.get_nth_ngram()  # Trouve le n-ième n-gramme le plus fréquent d'un certain auteur (code étudiant)
+            #tta.check_auteur_distance()
 
         # Si le code étudiant est trop lent (120 secondes par défaut), interrompre
         except debug_handler_common.DebugHandlerTimeOutException:

@@ -22,8 +22,6 @@
 import os
 import glob
 import ntpath
-
-
 class TextAnCommon:
     # Le code qui suit est fourni pour vous faciliter la vie.  Il n'a pas à être modifié
     # Signes de ponctuation à retirer (compléter la liste qui ne comprend que "!" au départ)
@@ -194,7 +192,7 @@ class TextAnCommon:
         self.remove_word_2 = False
         self.rep_aut = os.getcwd()
         self.auteurs = []
-        self.ngram = 1
+        self.ngram = 2
         self.mots_auteurs = {}
         self.taille_mots = {}
         return
