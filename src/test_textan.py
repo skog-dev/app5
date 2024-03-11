@@ -496,7 +496,7 @@ class TestTextAn(ParsingClassTextAn):
         if self.args.golden:
             self.golden_module = importlib.import_module(self.args.golden)
         else:
-            self.golden_module: Any = None
+            self.golden_module = None
         return
 
     def check_something_to_do(self) -> None:
@@ -699,7 +699,7 @@ def main() -> None:
             tta.check_auteur_distance()
 
         # Si le code étudiant est trop lent (120 secondes par défaut), interrompre
-        except debug_handler.DebugHandlerTimeOutException:
+        except debug_handler_common.DebugHandlerTimeOutException:
             tta.debug_handler.print_timeout_exception()
 
         # Mauvaise pratique (attraper toutes les exceptions), mais nécessaire ici, pour du code étudiant inconnu
@@ -712,6 +712,7 @@ def main() -> None:
         golden_tta.args.fichier_res
     ):  # stdout a été redirigé vers un fichier ; le fermer pour ne rien perdre
         sys.stdout.close()
+
     return
 
 

@@ -21,6 +21,8 @@
 
     Copyright 2018-2023, F. Mailhot et Université de Sherbrooke
 """
+import math
+import string
 
 from textan_common import TextAnCommon
 
@@ -74,9 +76,47 @@ class TextAn(TextAnCommon):
     # La fonction analyse() est appelée en premier par test_textan.py
     # Ensuite, selon ce qui est demandé, les fonctions find_author(), gen_text() ou get_nth_element() sont appelées
 
+    def load_text_aut(self, auteur: str):
+        for file in self.get_aut_files(auteur):
+            self.mots_auteurs[auteur].update(self.load_text(file))
+
+        self.taille_mots[auteur] = len(self.mots_auteurs[auteur])
+
+    def load_text(self, path: str):
+        with open(path, "r", encoding="utf-8") as f:
+            buffer = f.read().translate(str.maketrans("", "", "!()*,.:;?«»")).split()
+        f.close()
+
+        mots = {}
+        ngrams = []
+
+        for i in range(len(buffer) - self.ngram):
+            ngrams.append(tuple(buffer[i:i + self.ngram]))
+
+        for ngram in ngrams:
+            if ngram in mots:
+                mots[ngram] += 1
+            else:
+                mots[ngram] = 1
+
+        return mots
+
+    @staticmethod
+    def normalize_dict(vector: dict) -> dict:
+        val = 0
+        for key in vector.keys():
+            val += vector[key] ** 2
+
+        norm = math.sqrt(val)
+
+        for key in vector.keys():
+            vector[key] /= norm
+
+        return vector
+
     @staticmethod
     def dot_product_dict(
-        dict1: dict, dict2: dict, dict1_size: int, dict2_size: int
+            dict1: dict, dict2: dict, dict1_size: int, dict2_size: int
     ) -> float:
         """Calcule le produit scalaire NORMALISÉ de deux vecteurs représentés par des dictionnaires
 
@@ -92,10 +132,20 @@ class TextAn(TextAnCommon):
 
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        dot_product = 1.0
-        print(dict1_size, dict2_size)
-        if dict1 != dict2:
-            dot_product = 0.0
+
+        dot_product = 0.0
+
+        dict1 = TextAn.normalize_dict(dict1)
+        dict2 = TextAn.normalize_dict(dict2)
+
+        for key1, key2 in zip(dict1, dict2):
+            dot_product += dict1[key1] * dict2[key2]
+
+        # TODO : Implement dot_product_dict
+        # dot_product = 1.0
+        # print(dict1_size, dict2_size)
+        # if dict1 != dict2:
+        #     dot_product = 0.0
 
         return dot_product
 
@@ -114,11 +164,21 @@ class TextAn(TextAnCommon):
 
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        dot_product = 0.0
-        print(self)
-        if auteur1 == auteur2:
-            print(auteur1, auteur2)
-            dot_product = 1.0
+
+        self.load_text_aut(auteur1)
+        self.load_text_aut(auteur2)
+
+        dot_product = self.dot_product_dict(
+            self.mots_auteurs[auteur1], self.mots_auteurs[auteur2], self.taille_mots[auteur1], self.taille_mots[auteur2]
+        )
+
+        # TODO : Implement dot_product_aut
+        # dot_product = 0.0
+        # print(self)
+        # if auteur1 == auteur2:
+        #     print(auteur1, auteur2)
+        #     dot_product = 1.0
+
         return dot_product
 
     def dot_product_dict_aut(self, dict_oeuvre: dict, auteur: str) -> float:
@@ -137,12 +197,21 @@ class TextAn(TextAnCommon):
 
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
-        dot_product = 0.0
-        print(self)
-        if auteur in dict_oeuvre:
-            print(dict_oeuvre)
-            print(auteur)
-            dot_product = 1.0
+
+        self.load_text_aut(auteur)
+
+        dot_product = self.dot_product_dict(
+            dict_oeuvre, self.mots_auteurs[auteur], len(dict_oeuvre), self.taille_mots[auteur]
+        )
+
+        # TODO : Implement dot_product_dict_aut
+        # dot_product = 0.0
+        # print(self)
+        # if auteur in dict_oeuvre:
+        #     print(dict_oeuvre)
+        #     print(auteur)
+        #     dot_product = 1.0
+
         return dot_product
 
     def find_author(self, oeuvre: str) -> []:
@@ -160,11 +229,18 @@ class TextAn(TextAnCommon):
 
         # Les lignes suivantes ne servent qu'à éliminer un avertissement.
         # Il faut les retirer lorsque le code est complété
-        print(self.auteurs, oeuvre)
-        resultats = [
-            ("Premier_auteur", 0.1234),
-            ("Deuxième_auteur", 0.1123),
-        ]  # Exemple du format des sorties
+
+        resultats = []
+
+        for auteur in self.auteurs:
+            resultats.append((auteur, self.dot_product_dict_aut(self.load_text(oeuvre), auteur)))
+
+        # TODO : Implement find_author
+        # print(self.auteurs, oeuvre)
+        # resultats = [
+        #     ("Premier_auteur", 0.1234),
+        #     ("Deuxième_auteur", 0.1123),
+        # ]  # Exemple du format des sorties
 
         # Ajouter votre code pour déterminer la proximité du fichier passé en paramètre avec chacun des auteurs
         # Retourner la liste des auteurs, chacun avec sa proximité au fichier inconnu
@@ -189,6 +265,7 @@ class TextAn(TextAnCommon):
         """
 
         # Ce print ne sert qu'à éliminer un avertissement. Il doit être retiré lorsque le code est complété
+        # TODO : Implement gen_text_all
         print(self.auteurs, taille, textname)
 
         return
@@ -206,6 +283,7 @@ class TextAn(TextAnCommon):
         """
 
         # Ce print ne sert qu'à éliminer un avertissement. Il doit être retiré lorsque le code est complété
+        # TODO : Implement gen_text_auteur
         print(self.auteurs, auteur, taille, textname)
 
         return
@@ -223,8 +301,16 @@ class TextAn(TextAnCommon):
         """
         # Les lignes suivantes ne servent qu'à éliminer un avertissement.
         # Il faut les retirer lorsque le code est complété
-        print(self.auteurs, auteur, n)
-        ngram = [["un", "roman"]]  # Exemple du format de sortie d'un bigramme
+
+        if auteur not in self.mots_auteurs:
+            self.load_text_aut(auteur)
+
+        ngram = sorted(self.mots_auteurs[auteur].items(), key=lambda x: x[1], reverse=True)[n][0]
+
+        # TODO : Implement get_nth_element
+        # print(self.auteurs, auteur, n)
+        # ngram = [["un", "roman"]]  # Exemple du format de sortie d'un bigramme
+
         return ngram
 
     def analyze(self) -> None:
@@ -251,6 +337,8 @@ class TextAn(TextAnCommon):
         #   les mots d'une très longue oeuvre du même auteur. Ce n'est PAS ce qui vous est demandé ici.
 
         # Ces trois lignes ne servent qu'à éliminer un avertissement. Il faut les retirer lorsque le code est complété
+        # TODO : Implement analyze
+
         ngram = self.get_empty_ngram(2)
         print(ngram)
         print(self.auteurs)
