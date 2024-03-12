@@ -49,7 +49,7 @@ class TextAn(TextAnCommon):
     """
 
     # Signes de ponctuation à retirer (compléter cette liste incomplète)
-    PONC = ["!"]
+    PONC = ["!", "(", ")", "*", ".", ":", ";", "?", "«", "»"]
 
     def __init__(self) -> None:
         """Initialize l'objet de type TextAn lorsqu'il est créé
@@ -84,14 +84,14 @@ class TextAn(TextAnCommon):
 
     def load_text(self, path: str):
         with open(path, "r", encoding="utf-8") as f:
-            buffer = f.read().translate(str.maketrans("", "", "!()*,.:;?«»")).split()
+            buffer = f.read().split()
         f.close()
 
         mots = {}
         ngrams = []
 
         for i in range(len(buffer) - self.ngram):
-            ngrams.append(tuple(buffer[i:i + self.ngram]))
+            ngrams.append(" ".join(buffer[i:i + self.ngram]))
 
         for ngram in ngrams:
             if ngram in mots:
@@ -138,8 +138,11 @@ class TextAn(TextAnCommon):
         dict1 = TextAn.normalize_dict(dict1)
         dict2 = TextAn.normalize_dict(dict2)
 
-        for key1, key2 in zip(dict1, dict2):
-            dot_product += dict1[key1] * dict2[key2]
+        for key in dict1.keys():
+            try:
+                dot_product += dict1[key] * dict2[key]
+            except KeyError:
+                continue
 
         # TODO : Implement dot_product_dict
         # dot_product = 1.0
@@ -198,7 +201,8 @@ class TextAn(TextAnCommon):
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
 
-        self.load_text_aut(auteur)
+        if self.mots_auteurs[auteur] == {}:
+            self.load_text_aut(auteur)
 
         dot_product = self.dot_product_dict(
             dict_oeuvre, self.mots_auteurs[auteur], len(dict_oeuvre), self.taille_mots[auteur]
@@ -232,8 +236,10 @@ class TextAn(TextAnCommon):
 
         resultats = []
 
+        dict_oeuvre = self.load_text(oeuvre)
+
         for auteur in self.auteurs:
-            resultats.append((auteur, self.dot_product_dict_aut(self.load_text(oeuvre), auteur)))
+            resultats.append((auteur, self.dot_product_dict_aut(dict_oeuvre, auteur)))
 
         # TODO : Implement find_author
         # print(self.auteurs, oeuvre)
@@ -266,7 +272,15 @@ class TextAn(TextAnCommon):
 
         # Ce print ne sert qu'à éliminer un avertissement. Il doit être retiré lorsque le code est complété
         # TODO : Implement gen_text_all
-        print(self.auteurs, taille, textname)
+        # print(self.auteurs, taille, textname)
+
+        main_dict = {}
+
+        for auteur in self.auteurs:
+            main_dict.update(self.mots_auteurs[auteur])
+
+        with open(textname, "w", encoding="utf-8") as f:
+            pass
 
         return
 
@@ -284,7 +298,10 @@ class TextAn(TextAnCommon):
 
         # Ce print ne sert qu'à éliminer un avertissement. Il doit être retiré lorsque le code est complété
         # TODO : Implement gen_text_auteur
-        print(self.auteurs, auteur, taille, textname)
+        # print(self.auteurs, auteur, taille, textname)
+
+        with open(textname, "w", encoding="utf-8") as f:
+            pass
 
         return
 
@@ -302,16 +319,20 @@ class TextAn(TextAnCommon):
         # Les lignes suivantes ne servent qu'à éliminer un avertissement.
         # Il faut les retirer lorsque le code est complété
 
-        if auteur not in self.mots_auteurs:
+        if self.mots_auteurs[auteur] == {}:
             self.load_text_aut(auteur)
 
-        ngram = sorted(self.mots_auteurs[auteur].items(), key=lambda x: x[1], reverse=True)[n][0]
+        ngram = sorted(self.mots_auteurs[auteur].items(), key=lambda x: x[1], reverse=True)
+
+        print(ngram[0:100])
+
+        res = [element[0] for element in ngram if element[1] == ngram[0][1]]
 
         # TODO : Implement get_nth_element
         # print(self.auteurs, auteur, n)
         # ngram = [["un", "roman"]]  # Exemple du format de sortie d'un bigramme
 
-        return ngram
+        return res
 
     def analyze(self) -> None:
         """Fait l'analyse des textes fournis, en traitant chaque oeuvre de chaque auteur
@@ -339,8 +360,15 @@ class TextAn(TextAnCommon):
         # Ces trois lignes ne servent qu'à éliminer un avertissement. Il faut les retirer lorsque le code est complété
         # TODO : Implement analyze
 
-        ngram = self.get_empty_ngram(2)
-        print(ngram)
-        print(self.auteurs)
+        # ngram = self.get_empty_ngram(2)
+        # print(ngram)
+        # print(self.auteurs)
+
+        for auteur in self.auteurs:
+            print("Analyzing", auteur)
+            for oeuvre in self.get_aut_files(auteur):
+                res = self.find_author(oeuvre)
+                res.sort(key=lambda x: x[1], reverse=True)
+                print(res)
 
         return
