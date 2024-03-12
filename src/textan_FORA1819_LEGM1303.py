@@ -89,21 +89,32 @@ class TextAn(TextAnCommon):
         self.taille_mots[auteur] = len(self.mots_auteurs[auteur])
 
     def load_text(self, path: str):
+
         with open(path, "r", encoding="utf-8") as f:
-            buffer = f.read().split()
+            buffer = f.read()
+            if self.keep_ponc:
+                buffer.translate(str.maketrans("", "", "".join(self.PONC)))
+            buffer = buffer.lower().split()
         f.close()
 
         mots = {}
         ngrams = []
 
-        for i in range(len(buffer) - self.ngram):
-            ngrams.append(" ".join(buffer[i:i + self.ngram]))
+        for j in range(len(buffer) - self.ngram):
+            ngrams.append(" ".join(buffer[j:j + self.ngram]))
 
         for ngram in ngrams:
             if ngram in mots:
-                mots[ngram] += 1
+                mots[ngram][0] += 1
             else:
-                mots[ngram] = 1
+                mots[ngram] = [1, {}]
+
+        for i in range(len(ngrams) - 1):
+            next_word = ngrams[i + 1].split()[-1]
+            if next_word in mots[ngrams[i]][1]:
+                mots[ngrams[i]][1][next_word] += 1
+            else:
+                mots[ngrams[i]][1][next_word] = 1
 
         return mots
 
@@ -288,7 +299,7 @@ class TextAn(TextAnCommon):
         words = [word for word, count in main_dict.items() for _ in range(count)]
 
         with open(textname, "w", encoding="utf-8") as f:
-            for _ in range(1, taille // self.ngram):
+            for _ in range(1, taille // self.ngram + 1):
                 f.write(random.choice(words) + " ")
                 if _ % 8 == 0:
                     f.write("\n")
@@ -312,13 +323,41 @@ class TextAn(TextAnCommon):
 
         self.load_text_aut(auteur)
 
-        words = [word for word, count in self.mots_auteurs[auteur] for _ in range(count)]
+        words = [key for key, value in self.mots_auteurs[auteur].items() for _ in range(value[0])]
 
         with open(textname, "w", encoding="utf-8") as f:
-            for _ in range(1, taille // self.ngram):
-                f.write(random.choice(words) + " ")
-                if _ % 8 == 0:
+            current = random.choice(words)
+            f.write(current + " ")
+            for _ in range(taille):
+                next_words = [key for key, value in self.mots_auteurs[auteur][current][1].items() for _ in range(value)]
+                first_word = random.choice(next_words)
+                current = " ".join(current.split()[1::] + [first_word])
+                f.write(current.split()[-1] + " ")
+                if _ % 12 == 0:
                     f.write("\n")
+
+        number_of_words = 0
+
+        # Opening our text file in read only
+        # mode using the open() function
+        with open(r'Gen_text_FORA1819_LEGM1303_Zola.txt', 'r') as file:
+
+            # Reading the content of the file
+            # using the read() function and storing
+            # them in a new variable
+            data = file.read()
+
+            # Splitting the data into separate lines
+            # using the split() function
+            lines = data.split()
+
+            # Adding the length of the
+            # lines in our number_of_words
+            # variable
+            number_of_words += len(lines)
+
+        # Printing total number of words
+        print(number_of_words)
 
         return
 
