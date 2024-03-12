@@ -122,12 +122,12 @@ class TextAn(TextAnCommon):
     def normalize_dict(vector: dict) -> dict:
         val = 0
         for key in vector.keys():
-            val += vector[key] ** 2
+            val += vector[key][0] ** 2
 
         norm = math.sqrt(val)
 
         for key in vector.keys():
-            vector[key] /= norm
+            vector[key][0] /= norm
 
         return vector
 
@@ -157,7 +157,7 @@ class TextAn(TextAnCommon):
 
         for key in dict1.keys():
             try:
-                dot_product += dict1[key] * dict2[key]
+                dot_product += dict1[key][0] * dict2[key][0]
             except KeyError:
                 continue
 
