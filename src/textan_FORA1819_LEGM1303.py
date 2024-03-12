@@ -22,7 +22,7 @@
     Copyright 2018-2023, F. Mailhot et Université de Sherbrooke
 """
 import math
-import string
+import random
 
 from textan_common import TextAnCommon
 
@@ -77,6 +77,12 @@ class TextAn(TextAnCommon):
     # Ensuite, selon ce qui est demandé, les fonctions find_author(), gen_text() ou get_nth_element() sont appelées
 
     def load_text_aut(self, auteur: str):
+        if auteur not in self.mots_auteurs:
+            self.mots_auteurs[auteur] = {}
+        else:
+            if self.mots_auteurs[auteur] != {}:
+                return
+
         for file in self.get_aut_files(auteur):
             self.mots_auteurs[auteur].update(self.load_text(file))
 
@@ -201,8 +207,7 @@ class TextAn(TextAnCommon):
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
 
-        if self.mots_auteurs[auteur] == {}:
-            self.load_text_aut(auteur)
+        self.load_text_aut(auteur)
 
         dot_product = self.dot_product_dict(
             dict_oeuvre, self.mots_auteurs[auteur], len(dict_oeuvre), self.taille_mots[auteur]
@@ -277,11 +282,16 @@ class TextAn(TextAnCommon):
         main_dict = {}
 
         for auteur in self.auteurs:
+            self.load_text_aut(auteur)
             main_dict.update(self.mots_auteurs[auteur])
 
-        with open(textname, "w", encoding="utf-8") as f:
-            pass
+        words = [word for word, count in main_dict.items() for _ in range(count)]
 
+        with open(textname, "w", encoding="utf-8") as f:
+            for _ in range(1, taille // self.ngram):
+                f.write(random.choice(words) + " ")
+                if _ % 8 == 0:
+                    f.write("\n")
         return
 
     def gen_text_auteur(self, auteur: str, taille: int, textname: str) -> None:
@@ -300,8 +310,15 @@ class TextAn(TextAnCommon):
         # TODO : Implement gen_text_auteur
         # print(self.auteurs, auteur, taille, textname)
 
+        self.load_text_aut(auteur)
+
+        words = [word for word, count in self.mots_auteurs[auteur] for _ in range(count)]
+
         with open(textname, "w", encoding="utf-8") as f:
-            pass
+            for _ in range(1, taille // self.ngram):
+                f.write(random.choice(words) + " ")
+                if _ % 8 == 0:
+                    f.write("\n")
 
         return
 
@@ -319,14 +336,11 @@ class TextAn(TextAnCommon):
         # Les lignes suivantes ne servent qu'à éliminer un avertissement.
         # Il faut les retirer lorsque le code est complété
 
-        if self.mots_auteurs[auteur] == {}:
-            self.load_text_aut(auteur)
+        self.load_text_aut(auteur)
 
         ngram = sorted(self.mots_auteurs[auteur].items(), key=lambda x: x[1], reverse=True)
 
-        print(ngram[0:100])
-
-        res = [element[0] for element in ngram if element[1] == ngram[0][1]]
+        res = [element[0] for element in ngram if element[1] == ngram[n][1]]
 
         # TODO : Implement get_nth_element
         # print(self.auteurs, auteur, n)
@@ -364,11 +378,11 @@ class TextAn(TextAnCommon):
         # print(ngram)
         # print(self.auteurs)
 
-        for auteur in self.auteurs:
-            print("Analyzing", auteur)
-            for oeuvre in self.get_aut_files(auteur):
-                res = self.find_author(oeuvre)
-                res.sort(key=lambda x: x[1], reverse=True)
-                print(res)
+        # for auteur in self.auteurs:
+        #     print("Analyzing", auteur)
+        #     for oeuvre in self.get_aut_files(auteur):
+        #         res = self.find_author(oeuvre)
+        #         res.sort(key=lambda x: x[1], reverse=True)
+        #         print(res)
 
         return

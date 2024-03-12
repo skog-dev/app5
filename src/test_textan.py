@@ -162,7 +162,7 @@ class ParsingClassTextAn:
             if self.args.g_sep:
                 self.g_sep = self.args.g_sep
             if self.args.Ga:
-                self.g_auteur = self.args.Ga
+                self.auteur = self.args.Ga
                 self.gen_text = True
             if self.args.G:
                 self.gen_text_all = True
